@@ -59,12 +59,14 @@ hr {
 .blue {
     background-color: #24358c;
     border: #24358c;
-    margin-right: -10px;
 }
 .red {
     background-color: rgb(229, 59, 88);
     border: rgb(229, 59, 88);
-    margin-left: -10px;
+}
+button:disabled {
+    background-color: rgb(97, 92, 93);
+    border: rgb(97, 92, 93);
 }
 .small {
     font-size: 12px;

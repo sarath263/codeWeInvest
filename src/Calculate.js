@@ -1,21 +1,39 @@
-import React, { useState } from 'react';
-const smallMinus = () => {
-    console.log('hii');
+import React from 'react';
+const smallMinus = val => {
+    return decrement(val.small);
 };
-const mediumMinus = () => {
-    console.log('hii');
+const mediumMinus = val => {
+    return decrement(val.medium);
 };
-const largeMinus = () => {
-    console.log('hii');
+const largeMinus = val => {
+    return decrement(val.large);
 };
-const smallPlus = () => {
-    console.log('hii');
+const decrement = val => {
+    let newVal = val.slice();
+    if (newVal[0] > 0) {
+        newVal[0] = newVal[0] - 1;
+        if (newVal[0] <= 0) {
+            newVal[2] = true;
+            newVal[3] = false;
+        }
+    }
+    return newVal;
 };
-const mediumPlus = () => {
-    console.log('hii');
+
+const smallPlus = (val, set = () => {}) => {
+    return increment(val.small);
 };
-const largePlus = () => {
-    console.log('hii');
+const mediumPlus = (val, set = () => {}) => {
+    return increment(val.medium);
+};
+const largePlus = (val, set = () => {}) => {
+    return increment(val.large);
+};
+const increment = val => {
+    let newVal = val.slice();
+    newVal[0] = newVal[0] + 1;
+    newVal[2] = false;
+    return newVal;
 };
 
 const adultMinus = () => {
@@ -30,6 +48,7 @@ const childrenMinus = () => {
 const childrenPlus = () => {
     console.log('hii');
 };
+
 export {
     smallMinus,
     mediumMinus,
