@@ -13,7 +13,6 @@ const App = () => {
     const [total, setTotal] = useState(200);
 
     useEffect(() => {
-        console.log(medium);
         let sum =
             small[0] * 150 +
             small[1] * 150 +
@@ -22,69 +21,62 @@ const App = () => {
             large[0] * 300 +
             large[1] * 300;
         setTotal(sum);
+
+        let newLarge = large.slice();
+        let newMedium = medium.slice();
+        let newAdults = adults.slice();
+        if (medium[0] == 2) {
+            newMedium[0] = 0;
+            newMedium[2] = true;
+            newMedium[3] = false;
+            console.log(sum);
+            newLarge[0] = newLarge[0] + 1;
+            if (newLarge[0] > 1) {
+                newLarge[2] = false;
+            }
+            setMedium(newMedium);
+            setLarge(newLarge);
+        }
+        let newSmall = small.slice();
         if (sum + 150 > 1000) {
-            if (!small[3]) {
-                let newSmall = small.slice();
+            if (!small[3] || !medium[3] || !large[3]) {
                 newSmall[3] = true;
-                let newMedium = medium.slice();
                 newMedium[3] = true;
-                let newLarge = large.slice();
                 newLarge[3] = true;
                 setSmall(newSmall);
                 setMedium(newMedium);
                 setLarge(newLarge);
             }
         } else if (sum + 200 > 1000) {
-            if (!medium[3]) {
-                let newMedium = medium.slice();
+            if (!medium[3] || !large[3]) {
                 newMedium[3] = true;
-                let newLarge = large.slice();
                 newLarge[3] = true;
                 setMedium(newMedium);
                 setLarge(newLarge);
             }
         } else if (sum + 300 > 1000) {
             if (!large[3]) {
-                let newLarge = large.slice();
                 newLarge[3] = true;
                 setLarge(newLarge);
             }
         } else {
             if (small[3]) {
-                let newSmall = small.slice();
                 newSmall[3] = false;
                 setSmall(newSmall);
             }
             if (medium[3]) {
-                let newMedium = medium.slice();
                 newMedium[3] = false;
                 setMedium(newMedium);
             }
             if (large[3]) {
-                let newLarge = large.slice();
                 newLarge[3] = false;
                 setLarge(newLarge);
             }
         }
-        if (medium[0] == 2) {
-            let newMedium = medium.slice();
-            newMedium[0] = 0;
-            newMedium[2] = true;
-            newMedium[3] = false;
-            setMedium(newMedium);
-            let newLarge = large.slice();
-            newLarge[0]++;
-            if (newLarge[0] > 1) {
-                newLarge[2] = false;
-            }
-            setLarge(newLarge);
-        }
-        let newLarge = large.slice();
         if (medium[0] == 0 && newLarge[0] == 1 && !large[2]) {
             newLarge[2] = true;
             setLarge(newLarge);
         } else if (medium[0] == 1 && newLarge[0] == 0 && !medium[2]) {
-            let newMedium = medium.slice();
             newMedium[2] = true;
             setMedium(newMedium);
         }
@@ -94,7 +86,6 @@ const App = () => {
                 setLarge(newLarge);
             }
             if (medium[2]) {
-                let newMedium = medium.slice();
                 newMedium[2] = false;
                 setMedium(newMedium);
             }
