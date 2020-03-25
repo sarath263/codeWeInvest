@@ -68,7 +68,7 @@ const increment = val => {
 
 const adultMinus = val => {
     let newVal = val.medium.slice();
-    if (newVal[0] > 0) {
+    if ((newVal[0] > 0 && val.large > 0) || newVal[0] > 1) {
         newVal[0] = newVal[0] - 1;
         if (newVal[0] <= 0) {
             newVal[2] = true;

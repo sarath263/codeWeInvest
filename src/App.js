@@ -24,7 +24,6 @@ const App = () => {
 
         let newLarge = large.slice();
         let newMedium = medium.slice();
-        let newAdults = adults.slice();
         if (medium[0] == 2) {
             newMedium[0] = 0;
             newMedium[2] = true;

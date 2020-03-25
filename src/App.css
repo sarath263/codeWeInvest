@@ -65,8 +65,8 @@ hr {
     border: rgb(229, 59, 88);
 }
 button:disabled {
-    background-color: rgb(97, 92, 93);
-    border: rgb(97, 92, 93);
+    background-color: rgb(141, 139, 139);
+    border: rgb(141, 139, 139);
 }
 .small {
     font-size: 12px;
