@@ -20,7 +20,35 @@ const App = () => {
             large[0] * 300 +
             large[1] * 300;
         setTotal(sum);
-    }, [small, medium, large]);
+        if (sum + 150 > 1000) {
+            if (!small[3]) {
+                let newSmall = small.slice();
+                newSmall[3] = true;
+                let newMedium = medium.slice();
+                newMedium[3] = true;
+                let newLarge = large.slice();
+                newLarge[3] = true;
+                setSmall(newSmall);
+                setMedium(newMedium);
+                setLarge(newLarge);
+            }
+        } else if (sum + 200 > 1000) {
+            if (!medium[3]) {
+                let newMedium = medium.slice();
+                newMedium[3] = true;
+                let newLarge = large.slice();
+                newLarge[3] = true;
+                setMedium(newMedium);
+                setLarge(newLarge);
+            }
+        } else if (sum + 300 > 1000) {
+            if (!large[3]) {
+                let newLarge = large.slice();
+                newLarge[3] = true;
+                setLarge(newLarge);
+            }
+        }
+    }, [small, medium, large, adults, children, total]);
     let state = { small, medium, large, adults, children, total };
     return (
         <div className="container">
