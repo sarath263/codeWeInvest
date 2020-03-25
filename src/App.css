@@ -7,16 +7,24 @@
     width: 40%;
     height: 200px;
     border: #444 1px solid;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
-.subBox {
+.sub_box {
     width: 50%;
     float: right;
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-end;
+    margin-top: 10px;
 }
-.small {
+.full_box {
+    width: 97%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
 }
-.minusCircle {
+.buttonCircle {
     border-radius: 50%;
     width: 20px;
     height: 20px;
@@ -24,6 +32,46 @@
     align-items: center;
     justify-content: center;
     color: #fff;
+}
+.action_btns {
+    display: flex;
+    justify-content: space-evenly;
+    width: 110px;
+}
+.labels {
+    display: inline-flex;
+    justify-content: left;
+    width: 55%;
+}
+.box_total {
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+}
+hr {
+    border: none;
+    border-bottom: solid 1px #040404;
+    width: 95%;
+}
+.left_pad {
+    padding-left: 20px;
+}
+.blue {
     background-color: #24358c;
     border: #24358c;
+    margin-right: -10px;
+}
+.red {
+    background-color: rgb(229, 59, 88);
+    border: rgb(229, 59, 88);
+    margin-left: -10px;
+}
+.small {
+    font-size: 12px;
+}
+.medium {
+    font-size: 15px;
+}
+.large {
+    font-size: 18px;
 }
