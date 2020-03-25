@@ -6,11 +6,12 @@ import './font_awesome/css/all.min.css';
 
 const App = () => {
     const [small, setSmall] = useState([0, 0, true, false]);
-    const [medium, setMedium] = useState([0, 1, true, false]);
+    const [medium, setMedium] = useState([1, 0, true, false]);
     const [large, setLarge] = useState([0, 0, true, false]);
     const [adults, setAdults] = useState([1, 0, true, false]);
     const [children, setChildren] = useState([0, 0, true, false]);
     const [total, setTotal] = useState(200);
+
     useEffect(() => {
         console.log(medium);
         let sum =
@@ -48,8 +49,58 @@ const App = () => {
                 newLarge[3] = true;
                 setLarge(newLarge);
             }
+        } else {
+            if (small[3]) {
+                let newSmall = small.slice();
+                newSmall[3] = false;
+                setSmall(newSmall);
+            }
+            if (medium[3]) {
+                let newMedium = medium.slice();
+                newMedium[3] = false;
+                setMedium(newMedium);
+            }
+            if (large[3]) {
+                let newLarge = large.slice();
+                newLarge[3] = false;
+                setLarge(newLarge);
+            }
+        }
+        if (medium[0] == 2) {
+            let newMedium = medium.slice();
+            newMedium[0] = 0;
+            newMedium[2] = true;
+            newMedium[3] = false;
+            setMedium(newMedium);
+            let newLarge = large.slice();
+            newLarge[0]++;
+            if (newLarge[0] > 1) {
+                newLarge[2] = false;
+            }
+            setLarge(newLarge);
+        }
+        let newLarge = large.slice();
+        if (medium[0] == 0 && newLarge[0] == 1 && !large[2]) {
+            newLarge[2] = true;
+            setLarge(newLarge);
+        } else if (medium[0] == 1 && newLarge[0] == 0 && !medium[2]) {
+            let newMedium = medium.slice();
+            newMedium[2] = true;
+            setMedium(newMedium);
+        }
+        if (medium[0] == 1 && newLarge[0] == 1) {
+            if (newLarge[2]) {
+                newLarge[2] = false;
+                setLarge(newLarge);
+            }
+            if (medium[2]) {
+                let newMedium = medium.slice();
+                newMedium[2] = false;
+                setMedium(newMedium);
+            }
         }
     }, [small, medium, large, adults, children, total]);
+
     let state = { small, medium, large, adults, children, total };
     return (
         <div className="container">
@@ -58,16 +109,32 @@ const App = () => {
             </div>
             <div className="box">
                 <SubBox
-                    minusClick={() => setSmall(c.smallMinus(state))}
-                    plusClick={() => setSmall(c.smallPlus(state))}
+                    minusClick={() => {
+                        let minused = c.smallMinus(state);
+                        setSmall(minused.small);
+                        setChildren(minused.children);
+                    }}
+                    plusClick={() => {
+                        let plused = c.smallPlus(state);
+                        setSmall(plused.small);
+                        setChildren(plused.children);
+                    }}
                     minusStatus={small[2]}
                     plusStatus={small[3]}
                     text="SMALL"
                     value={small[0] + small[1]}
                 />
                 <SubBox
-                    minusClick={() => setMedium(c.mediumMinus(state))}
-                    plusClick={() => setMedium(c.mediumPlus(state))}
+                    minusClick={() => {
+                        let minused = c.mediumMinus(state);
+                        setMedium(minused.medium);
+                        setAdults(minused.adults);
+                    }}
+                    plusClick={() => {
+                        let plused = c.mediumPlus(state);
+                        setMedium(plused.medium);
+                        setAdults(plused.adults);
+                    }}
                     minusStatus={medium[2]}
                     plusStatus={medium[3]}
                     text="MEDIUM"
@@ -84,10 +151,14 @@ const App = () => {
                 <hr />
                 <FullBox
                     minusClick={() => {
-                        c.adultMinus(adults, setAdults);
+                        let minused = c.adultMinus(state);
+                        setMedium(minused.medium);
+                        setAdults(minused.adults);
                     }}
                     plusClick={() => {
-                        c.adultPlus(adults, setAdults);
+                        let plused = c.adultPlus(state);
+                        setMedium(plused.medium);
+                        setAdults(plused.adults);
                     }}
                     minusStatus={adults[2]}
                     plusStatus={adults[3]}
@@ -98,10 +169,14 @@ const App = () => {
                 <hr />
                 <FullBox
                     minusClick={() => {
-                        c.childrenMinus(children, setChildren);
+                        let minused = c.childrenMinus(state);
+                        setSmall(minused.small);
+                        setChildren(minused.children);
                     }}
                     plusClick={() => {
-                        c.childrenPlus(children, setChildren);
+                        let plused = c.childrenPlus(state);
+                        setSmall(plused.small);
+                        setChildren(plused.children);
                     }}
                     minusStatus={children[2]}
                     plusStatus={children[3]}
